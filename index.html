@@ -1,0 +1,1238 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<link href="scripts/aos.css" rel="stylesheet">
+<script src="scripts/aos.js"></script>
+<script src="scripts/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+
+<script src="scripts/vanta.net.min.js"></script>
+<link rel="stylesheet" href="compiledstyles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary Meta Tags -->
+    
+<meta name="title" content="Monash Nexus for Emerging Technologies" />
+<meta name="description" content="A dynamic student team dedicated to exploring and advancing the frontiers of technology, our mission is to push the boundaries of innovation." />
+<meta name="theme-color" content="#DC003B">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://monashemerging.tech" />
+<meta property="og:title" content="Monash Nexus for Emerging Technologies" />
+<meta property="og:description" content="A dynamic student team dedicated to exploring and advancing the frontiers of technology, our mission is to push the boundaries of innovation." />
+<meta property="og:image" content="img/logo.webp" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://monashemerging.tech" />
+<meta property="twitter:title" content="Monash Nexus for Emerging Technologies" />
+<meta property="twitter:description" content="A dynamic student team dedicated to exploring and advancing the frontiers of technology, our mission is to push the boundaries of innovation." />
+<meta property="twitter:image" content="img/logo.webp" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.webp">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.webp">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.webp">
+<link rel="manifest" href="/site.webmanifest">
+
+
+<div id="loader" style="z-index: 999;" class="fixed inset-0 flex items-center justify-center bg-black">
+      <div style="text-align: center; color: white;">
+         <div style="font-family:'OffBit Trial Bold';font-weight:normal;transition: all 0.5s cubic-bezier(0,-0.03,0,1);" id="loadingText" class="text-9xl" style=" opacity: 1; transition: opacity 0.5s, transform 1s;">0</div>
+      </div>
+</div>
+<script>
+const loader = document.getElementById("loader");
+const loadingText = document.getElementById("loadingText");
+let loadPercent = 0;
+const checkLoad = setInterval(() => {
+    if (document.readyState === 'complete') {
+      loadPercent = 99;
+      zoomOutEffect();
+        clearInterval(checkLoad);
+        var element = document.getElementById('mainNavbar');
+        const animation = setInterval(() => {
+        if (element) {
+            element.classList.add('navbar');
+        }
+      }, 400);
+    }
+});
+
+    // Simulate loading
+    const loadingSimulation = setInterval(() => {
+        loadPercent++;
+
+        // Ensure it doesn't exceed 100
+        if (loadPercent >= 100) {
+            clearInterval(loadingSimulation);
+            zoomOutEffect();
+        }
+    }, 24); // Adjust the interval to speed up or slow down the loading time
+
+
+const updateText = setInterval(() => {
+    loadingText.innerHTML = loadPercent + ''; // Display the loading percentage
+    if (loadPercent >= 100) {
+        clearInterval(updateText);
+    }
+}, 300);
+
+function zoomOutEffect() {
+    requestAnimationFrame(() => {
+        loadingText.style.transform = 'scale(2)'; // Zooms the text
+        loadingText.style.opacity = '0'; // Fades the text
+
+        setTimeout(() => {
+            loader.style.opacity = '0'; // Begin fading out the loader background
+            setTimeout(() => {
+                loader.style.display = 'none'; // Completely remove the loader from view
+            }, 1000); // Corresponds to the transition time
+        }, 200); // Time for the text animation to complete
+    });
+}
+console.info("Written by Faye @ https://faye.lol/");
+</script>
+<div id="overlay" style="opacity: 0; transition: all 0.5s cubic-bezier(0,-0.03,0,1); pointer-events: none;" class="fixed inset-0 z-40 bg-black bg-opacity-75"></div>
+<div style="transition: all 1s cubic-bezier(0,-0.03,0,1); border: 1px solid #2C2C2D;" class="fixed flex w-auto bg-black bg-opacity-50 rounded-2xl backdrop-blur-md place-content-center" id="mainNavbar">
+   <div class="flex flex-row h-8 my-auto ml-0 left md:h-auto ">
+      <img src="img/fhxc.png" class="w-auto h-16 m-auto mr-4 ">
+      <!-- <a href="http://localhost:8080/index.html" data-ccursor id="left" class="p-0.5 rounded-sm">
+         <h1 style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="m-auto text-white text-lg tracking-widest translate-y-0.5 text-left md:mb-4 md:text-3xl">
+            FHXC
+         </h1>
+         <h2 style="font-family:'OffBit Trial Dot'; font-weight:normal;" class="text-white hidden m-auto -mt-4 tracking-wide text-left uppercase md:block">
+            方湖信创工作室
+         </h2>
+      </a> -->
+   </div>
+   <div class="flex m-auto mr-0 right place-content-center gap-x-4">
+      <a data-ccursor href="http://localhost:8080/index.html" target="_blank" style="background-color: #DC003B; font-family:'OffBit Trial 101'; font-weight:normal; transition: all 0.5s cubic-bezier(0,-0.03,0,1);" class="flex duration-300 md:hover:-translate-y-0.5 flex-row p-2 px-3 my-auto text-sm tracking-wide text-white place-content-center rounded-md hidden lg:block">
+         <span>联系我们</span>
+      </a>
+      <a data-ccursor style="background-color: black; font-family:'OffBit Trial Regular'; font-weight:normal; transition: all 0.5s cubic-bezier(0,-0.03,0,1);" href="https://docs.google.com/forms/d/e/1FAIpQLSej1jyIYU_dy2uJqEs5zUvNY1GUN-6eN2DqxCbb2ucnYrTI7Q/viewform" class="flex hidden border border-gray-500 duration-300 md:hover:-translate-y-0.5 flex-row p-2 px-3 my-auto text-sm tracking-wide text-white place-content-center rounded-md">
+         <span class="hidden m-auto md:block">JOIN US</span>
+         <span class="block m-auto md:hidden">JOIN</span>
+      </a>
+      <button id="menuButton" data-ccursor style="background-color: #040dc1; font-family:'OffBit Trial 101'; font-weight:normal; transition: all 0.5s cubic-bezier(0,-0.03,0,1); cursor: none;" class="button flex w-20 h-8 p-2 px-3 text-sm text-white duration-300 md:hover:-translate-y-0.5 place-content-center rounded-md">
+         菜单
+         <span class="flex">
+            <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg">
+               <circle class="m-auto -translate-y-0.5" cx="10" cy="10" r="2" fill="white" />
+            </svg>
+         </span>
+      </button>
+   </div>
+</div>
+<div id="mobileMenu" style="transition: all 1s cubic-bezier(0,-0.03,0,1); z-index: 50; pointer-events: none;" class="fixed flex flex-col w-screen gap-4 px-[24px] -translate-x-1/2 md:placeholder:x-auto md:w-auto left-1/2 md:-translate-x-0 md:right-0 md:left-auto top-32">
+   <div id="mobileMenuDiv1" style="font-family:'OffBit Trial Bold'; font-weight:normal; border: 1px solid #2C2C2D; border-radius: 20px; background-color: rgba(0, 0, 0, 0.75);" class="flex flex-col w-full h-0 p-4 text-2xl uppercase shadow-2xl gap-y-2 rounded-xl md:w-56 mobileMenuDiv1Hidden drop-shadow-2xl place-content-center">
+      <!-- <a data-ccursor target="_blank" href=" ">
+         About
+      </a>
+      <a data-ccursor target="_blank" href=" ">
+         Monash Smart <br> Manufacturing
+      </a>
+      <a data-ccursor target="_blank" href=" ">
+         Embodied Visualisation
+      </a>
+      <a data-ccursor target="_blank" href=" " class="w-full p-1 pl-4 m-auto text-base text-center text-white rounded-lg h-min">
+         VARS
+      </a> -->
+   </div>
+   <div id="mobileMenuDiv2" style="border: 1px solid #2C2C2D; border-radius: 20px; background-color: rgba(0, 0, 0, 0.75);" class="flex flex-col w-full h-16 px-4 text-white lg:h-16 rounded-xl md:rounded-md md:w-56 place-content-center mobileMenuDiv2Hidden">
+      <a target="_blank" href="http://localhost:8080/index.html" data-ccursor class="flex w-full m-auto mx-4 mb-4 ml-0 text-xl rounded-lg h-min place-content-center">
+         <span style="font-family:'OffBit Trial Bold';" class="m-auto text-lg translate-y-0.5">联系我们</span>
+         <svg class="w-8 h-8 m-auto mr-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M22 4H2v16h20V4zM4 18V6h16v12H4zM8 8H6v2h2v2h2v2h4v-2h2v-2h2V8h-2v2h-2v2h-4v-2H8V8z" fill="currentColor"/>
+         </svg>
+      </a>
+   </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var menuButton = document.getElementById("menuButton");
+    var mobileMenu = document.getElementById("mobileMenu");
+    var mobileMenuDiv1 = document.getElementById("mobileMenuDiv1");
+    var mobileMenuDiv2 = document.getElementById("mobileMenuDiv2");
+    var overlay = document.getElementById("overlay");
+    overlay.style.pointerEvents = 'none';
+
+    function toggleVisibility(menuDiv, isVisible) {
+        var elements = menuDiv.querySelectorAll('*');
+        elements.forEach(element => {
+            if (isVisible) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        });
+    }
+
+    // Ensure all elements are hidden initially
+    toggleVisibility(mobileMenuDiv1, false);
+    toggleVisibility(mobileMenuDiv2, false);
+
+    menuButton.addEventListener("click", function() {
+        var isMenuVisible = mobileMenuDiv1.classList.contains("mobileMenuDiv1Visible");
+
+        animateTextChange(menuButton, isMenuVisible ? "关闭" : "菜单", isMenuVisible ? "菜单" : "关闭");
+
+        mobileMenuDiv1.classList.toggle("mobileMenuDiv1Visible");
+        mobileMenuDiv1.classList.toggle("mobileMenuDiv1Hidden");
+
+        mobileMenuDiv2.classList.toggle("mobileMenuDiv2Visible");
+        mobileMenuDiv2.classList.toggle("mobileMenuDiv2Hidden");
+
+        if (isMenuVisible) {
+            overlay.style.opacity = 0;
+            overlay.style.pointerEvents = 'none';
+            mobileMenu.style.pointerEvents = 'none';
+        } else {
+            overlay.style.opacity = 1;
+            overlay.style.pointerEvents = 'auto';
+            mobileMenu.style.pointerEvents = 'auto';
+        }
+
+        toggleVisibility(mobileMenuDiv1, !isMenuVisible);
+        toggleVisibility(mobileMenuDiv2, !isMenuVisible);
+    });
+
+    overlay.addEventListener("click", function() {
+        if (mobileMenuDiv1.classList.contains("mobileMenuDiv1Visible")) {
+            animateTextChange(menuButton, "关闭", "菜单");
+
+            mobileMenuDiv1.classList.remove("mobileMenuDiv1Visible");
+            mobileMenuDiv1.classList.add("mobileMenuDiv1Hidden");
+
+            mobileMenuDiv2.classList.remove("mobileMenuDiv2Visible");
+            mobileMenuDiv2.classList.add("mobileMenuDiv2Hidden");
+
+            overlay.style.opacity = 0;
+            overlay.style.pointerEvents = 'none';
+            mobileMenu.style.pointerEvents = 'none';
+
+            toggleVisibility(mobileMenuDiv1, false);
+            toggleVisibility(mobileMenuDiv2, false);
+        }
+    });
+
+    function animateTextChange(button, oldText, newText) {
+        let maxLength = Math.max(oldText.length, newText.length);
+        let transitionText = oldText.padEnd(maxLength, ' ');
+        button.textContent = transitionText;
+
+        function changeLetter(index) {
+            let svg = `<span class="flex">
+                            <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="m-auto -translate-y-0.5" cx="10" cy="10" r="2" fill="white" />
+                            </svg>
+                        </span>`;
+            if (index >= maxLength) {
+                return;
+            }
+
+            let targetChar = newText.charAt(index) || ' ';
+            let cycles = 3;
+
+            function animateCycle(currentCycle) {
+                if (currentCycle >= cycles) {
+                    transitionText = transitionText.substring(0, index) + targetChar + transitionText.substring(index + 1);
+                    button.innerHTML = transitionText;
+                    button.innerHTML += svg;
+                    changeLetter(index + 1);
+                } else {
+                    let randomChar = String.fromCharCode(Math.random() * (126 - 33) + 33);
+                    transitionText = transitionText.substring(0, index) + randomChar + transitionText.substring(index + 1);
+                    button.innerHTML = transitionText;
+                    button.innerHTML += svg;
+                    setTimeout(() => animateCycle(currentCycle + 1), 50);
+                }
+            }
+
+            animateCycle(0);
+        }
+
+        changeLetter(0);
+    }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('mainNavbar');
+        if ((window.innerWidth > 768 && window.scrollY > 7) || (window.innerWidth < 768 && window.scrollY > 7)) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+});
+</script>
+<script src="https://unpkg.com/detect-it@4/dist/detect-it.umd.production.js"></script>
+<script>
+let contextCursorScript;
+let html = document.documentElement;
+html.style.cursor = 'none';
+function loadContextCursor() {
+    if (!contextCursorScript) {
+        contextCursorScript = document.createElement('script');
+        contextCursorScript.src = './context-cursor.js';
+        document.head.appendChild(contextCursorScript);
+    }
+}
+function unloadContextCursor() {
+    if (contextCursorScript) {
+        document.head.removeChild(contextCursorScript);
+        contextCursorScript = null;
+    }
+}
+function updateContextCursor() {
+    if (window.DetectIt.hasMouse || window.DetectIt.deviceType === 'mouseOnly'){
+        loadContextCursor();
+    } else {
+        unloadContextCursor();
+        html.style.cursor = 'auto';
+    }
+}
+updateContextCursor();
+setInterval(updateContextCursor, 10000);
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "Monash Nexus For Emerging Technologies",
+  "url": "https://monashemerging.tech",
+  "logo": "https://monashemerging.tech/img/logo.webp",
+  "sameAs": [
+    "https://www.facebook.com/monashemergingtech/",
+    "https://www.instagram.com/monashemergingtech/",
+    "https://www.linkedin.com/company/98982050"
+  ]
+}
+</script>
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+        <style>
+          /* Hide scrollbar for Chrome, Safari, and Opera */
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge, and Firefox */
+        html {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        </style>
+        
+        
+        <meta charset="UTF-8">
+        <title>方湖信创工作室</title>
+
+
+      
+    </head>
+    
+
+    <body data-scrollbar  class="w-screen overflow-x-hidden bg-black max-w-screen">
+    <div data-ccursor="" id="backToTop" onclick="backToTop()"
+      class="fixed z-50 w-12 h-12 bg-black bottom-8 right-8"
+      style="display: block; opacity: 0; transition: opacity 1s cubic-bezier(.17,.67,.83,.67); visibility: hidden; pointer-events: none;">
+    <svg fill="none" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M3 21h18V3H3v18zM19 5v14H5V5h14zm-8 12h2v-6h2V9h-2V7h-2v2H9v2h2v6zm-2-4v-2H7v2h2zm8 0h-2v-2h2v2z" fill="white"/>
+    </svg>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      var backToTop = document.getElementById('backToTop');
+      if (window.scrollY > window.innerHeight) {
+        backToTop.style.opacity = 1;
+        backToTop.style.visibility = 'visible'; // Ensure the button is visible when fading in
+        backToTop.style.pointerEvents = 'auto'; // Enable interactions
+      } else {
+        backToTop.style.opacity = 0;
+        // Delay visibility change until after opacity transition completes
+        setTimeout(function() {
+          if (window.scrollY <= window.innerHeight) { // Check again to avoid race conditions
+            backToTop.style.visibility = 'hidden'; // Hide after transition
+            backToTop.style.pointerEvents = 'none'; // Disable interactions when not visible
+          }
+        }, 1000); // Delay should match the duration of the opacity transition
+      }
+    });
+
+    function backToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+
+    
+    <div id="scrollIndicator" class="fixed z-50 flex w-2 h-16 p-[1px] -translate-y-1/2 border border-black bg-white rounded-full place-content-center drop-shadow-2xl mix-blend-exclude top-1/2 right-4">
+      <div id="innerIndicator" class="w-1 mix-blend-normal m-auto mt-0 bg-[#DC003B] rounded-full"></div>
+  </div>
+  <script>
+      document.addEventListener("scroll", function() {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = scrollTop / docHeight;
+
+          const innerIndicator = document.getElementById('innerIndicator');
+          innerIndicator.style.height = scrollPercent * 100 + '%';
+
+        
+      });
+
+  </script>
+
+        
+         
+      
+        
+
+          
+          
+          
+
+<div  class="z-20 w-screen bg-black h-[500px] sm:h-screen">
+         <div class="w-full h-full m-auto overflow-hidden #rounded-xl #md:rounded-3xl ">
+         
+         
+            <shader-art autoplay class="w-full h-full ">
+             <div  class="absolute top-0 bottom-0 left-0 right-0 flex flex-col w-full pt-12 md:pt-0 place-content-center 0">
+             <div data-aos="fade-right" data-aos-easing="ease-in-out" data-aos-duration="800" data-aos-anchor-placement="top-center" class="m-auto ">
+                <p style="font-family:'OffBit Trial Regular';font-weight:normal; white-space: nowrap;" class="mb-2 text-sm tracking-widest text-white event-container md:text-xl rounded-xl w-min" ><a data-ccursor class="tracking-wide" style="display: inline-block; text-decoration:underline; border-radius: 0.375rem" href="http://0.0.0.0" target="_blank">正在招新</a>    <span id="timer">至2025/10/25>
+                 <h1 style="font-family:'OffBit Trial Bold';font-weight:normal " class="m-auto mb-0 text-2xl tracking-wide text-left text-white h-min sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl" > 方湖信创 <br> 人工智能与软件学院  </h1>
+                  <p style="font-family:'OffBit Trial Regular';font-weight:normal; white-space: nowrap;" class="mt-2 text-xs tracking-widest text-white md:text-xl rounded-xl w-min" > </p>
+                 <div class="flex m-auto">
+                     <p id="changingTextHero" style="font-family:'OffBit Trial Regular';font-weight:normal " class="h-12 tracking-wide m-auto mt-2 ml-0 mr-[0.15rem] text-left text-white ">  </p> 
+                     <span class="w-2 h-0.5 m-auto ml-0 animate-pulse -translate-y-[0.25rem]  bg-white">  </span>
+                 </div>
+                 <div >
+                 <a data-ccursor href="http://localhost:8080/index.html" target="_blank" style="background-color: #DC003B;font-family:'OffBit Trial 101';font-weight:normal; transition: all 0.5s cubic-bezier(0,-0.03,0,1);" href="" class="duration-300 md:hover:-translate-y-0.5 inline-block p-2 px-3 my-auto text-sm tracking-wide hover:brighntess-90 text-white place-content-center rounded-md ">
+            <span class=""> 加入我们<br></span> 
+            </a>
+            </div>
+                
+                 
+             </div>
+             <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const words = ["方湖大模型", "学生档案管理系统", "超级小智", "集群式数据看板", "多模态视觉智能"];
+            let currentWordIndex = 0;
+            let currentCharIndex = 0;
+            const targetElement = document.getElementById('changingTextHero');
+
+            function type() {
+                if (currentCharIndex < words[currentWordIndex].length) {
+                    targetElement.innerHTML += words[currentWordIndex].charAt(currentCharIndex);
+                    currentCharIndex++;
+                    setTimeout(type, 200);
+                } else {
+                    setTimeout(erase, 1000);
+                }
+            }
+
+            function erase() {
+                if (currentCharIndex > 0) {
+                    targetElement.innerHTML = words[currentWordIndex].substring(0, currentCharIndex - 1);
+                    currentCharIndex--;
+                    setTimeout(erase, 100);
+                } else {
+                    currentWordIndex = (currentWordIndex + 1) % words.length;
+                    setTimeout(type, 500);
+                }
+            }
+
+            type();
+        });
+    </script>
+         </div>
+               <uniform type="float" name="scale" value=".1" min="0.2" max="4" step="0.01" />
+               <uniform type="float" name="ax" value="5" min="1" max="15" step=".01" />
+               <uniform type="float" name="ay" value="7" min="1" max="15" step=".01" />
+               <uniform type="float" name="az" value="9" min="1" max="15" step=".01" />
+               <uniform type="float" name="aw" value="13" min="1" max="15" step=".01" />
+               <uniform type="float" name="bx" value="1" min="-1" max="1" step="0.01" />
+               <uniform type="float" name="by" value="1" min="-1" max="1" step="0.01" />
+               <uniform type="color" name="color1" value="#f20544" />
+               <uniform type="color" name="color2" value="#4F47E6" />
+               <uniform type="color" name="color3" value="#040FD9" />
+               <uniform type="color" name="color4" value="#040DBF" />
+               <script type="buffer" name="position" data-size="2">
+                  [-1, 1, -1,-1, 1,1, 1, 1, -1,-1, 1,-1]
+               </script>
+               <script type="buffer" name="uv" data-size="2">
+                  [ 0, 0, 0, 1, 1,0, 1, 0, 0, 1, 1, 1]
+               </script>
+               <script type="vert">
+                  precision highp float;
+                  attribute vec4 position;
+                  attribute vec2 uv;
+                  varying vec2 vUv;
+                  void main() {
+                      vUv = uv;
+                      gl_Position = position;
+                  }
+               </script>
+               <script type="frag">
+                  precision highp float;
+                  varying vec2 vUv;
+                  uniform float time;
+                  uniform float scale;
+                  uniform vec2 resolution;
+                  uniform vec3 color1, color2, color3, color4;
+                  uniform int numOctaves;
+                  const float PI = 3.141592654;
+                  uniform float ax, ay, az, aw;
+                  uniform float bx, by;
+                  // just a bunch of sin & cos to generate an interesting pattern
+                  float cheapNoise(vec3 stp) {
+                      vec3 p = vec3(stp.st, stp.p);
+                      vec4 a = vec4(ax, ay, az, aw);
+                      return mix(
+                          sin(p.z + p.x * a.x + cos(p.x * a.x - p.z)) * 
+                          cos(p.z + p.y * a.y + cos(p.y * a.x + p.z)),
+                          sin(1. + p.x * a.z + p.z + cos(p.y * a.w - p.z)) * 
+                          cos(1. + p.y * a.w + p.z + cos(p.x * a.x + p.z)), 
+                          .436
+                      );
+                  }
+                  void main() {
+                      vec2 aR = vec2(resolution.x/resolution.y, 1.);
+                      vec2 st = vUv * aR * scale;
+                      float S = sin(time * .005);
+                      float C = cos(time * .005);
+                      vec2 v1 = vec2(cheapNoise(vec3(st, 2.)), cheapNoise(vec3(st, 1.)));
+                      vec2 v2 = vec2(
+                          cheapNoise(vec3(st + bx*v1 + vec2(C * 1.7, S * 9.2), 0.15 * time)),
+                          cheapNoise(vec3(st + by*v1 + vec2(S * 8.3, C * 2.8), 0.126 * time))
+                      );
+                      float n = .5 + .5 * cheapNoise(vec3(st + v2, 0.));
+                      vec3 color = mix(color1,
+                          color2,
+                          clamp((n*n)*8.,0.0,1.0));
+                      color = mix(color,
+                          color3,
+                          clamp(length(v1),0.0,1.0));
+                      color = mix(color,
+                          color4,
+                          clamp(length(v2.x),0.0,1.0));
+                      //       color *= n * n * n + .6  * n * n + .5 * n;
+                      color /= n*n + n * 7.;
+                      gl_FragColor = vec4(color,1.);
+                  }
+               </script>
+            </shader-art>
+           
+         </div>
+      </div>
+
+      <script type="module">
+         import {ShaderArt} from 'https://esm.sh/shader-art';
+         import { UniformPlugin } from 'https://esm.sh/@shader-art/plugin-uniform';
+         
+         ShaderArt.register([() => new UniformPlugin()]);
+         
+      </script>
+      <script>
+// Set the date and time of the event starting in Melbourne time
+var countDownDate = new Date("May 1, 2025 19:00:00").getTime();
+var eventDuration = 4 * 24 * 60 * 60 * 1000; // 5 days in milliseconds
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var afterEvent = now - countDownDate - eventDuration;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Before the event starts
+    if (distance > 0) {
+        document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    } else if (distance <= 0 && afterEvent <= 0) {
+        // During the event
+        document.querySelector(".event-container p").innerHTML = "Orientation Week is live!";
+    } else {
+        // After the event ends
+        clearInterval(x);
+        document.querySelector(".event-container p").innerHTML = "Thanks for attending O-Week!";
+    }
+}, 1000);
+</script>
+      
+     
+        <div style="background-color: #DC003B;" class="w-screen text-white -translate-y-9 stock-ticker">
+          <ul style="font-family:'OffBit Trial Regular';font-weight:normal" class="tracking-wide">
+              <li>向下滚动</li>
+              <li>.</li>
+              <li>方湖信创</li>
+              <li>.</li>
+              <li>向下滚动</li>
+              <li>.</li>
+              <li>方湖信创</li>
+              <li>.</li>
+              <li>向下滚动</li>
+              <li>.</li>
+              <li>方湖信创</li>
+              <li>.</li>
+          </ul>
+          <ul style="font-family:'OffBit Trial Regular';font-weight:normal" aria-hidden="true" class="tracking-wide">
+              <li></li>
+              <li>向下滚动</li>
+              <li>.</li>
+              <li>方湖信创</li>
+              <li>.</li>
+              <li>向下滚动</li>
+              <li>.</li>
+              <li>方湖信创</li>
+              <li>.</li>
+              <li>向下滚动</li>
+              <li>.</li>
+          </ul>
+          </div>
+          <div id="cardWrapper" style="overflow: hidden;" class="-mt-8">
+  <!-- Starfield Card -->
+  <section id="starfieldCard">
+    <div id="threeJsContainer" 
+         style="background-color: black; position: relative;" 
+         class="flex w-screen h-screen m-auto overflow-hidden text-white bg-cover pointer-events-none brightness-150 place-content-center">
+      
+      <!-- 文字容器（屏幕居中） -->
+      <div id="textContainer">
+        <div class="fade-text text">
+          创新，就在此刻
+        </div>
+        <div class="fade-text text">
+          创造，就在当下
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Next Card (Incoming Section) -->
+  
+</div>
+
+<script type="module">
+  import { swarmBackground } from 'https://unpkg.com/threejs-toys@0.0.8/build/threejs-toys.module.cdn.min.js';
+  import gsap from 'https://cdn.skypack.dev/gsap';
+  import ScrollTrigger from 'https://cdn.skypack.dev/gsap/ScrollTrigger.js';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Initialize the starfield background
+  const container = document.getElementById('threeJsContainer');
+  const bg = swarmBackground({
+    el: container,
+    eventsEl: container,
+    gpgpuSize: 60, // Adjust for performance if needed
+    geometry: 'cube',
+  });
+  
+  // Set the initial camera position
+  bg.three.camera.position.set(0, 0, 100);
+  
+  // Update material color to red for all meshes
+  bg.three.scene.traverse((object) => {
+    if (object.isMesh) {
+      object.material.color = new THREE.Color('#DC013A');
+    }
+  });
+  
+  // Starfield scroll effects: update text opacity, camera zoom, and blur filter
+  let latestScroll = 0;
+  let ticking = false;
+  
+  const updateOnScroll = () => {
+    const scrollTop = latestScroll;
+    const maxScroll = window.innerHeight; // full-screen scroll distance
+    const textElement = document.getElementById('text1');
+    const screenWidth = window.innerWidth;
+  
+    // Fade in the text as you scroll down
+    const opacity = Math.min(scrollTop / maxScroll, 1);
+    gsap.to(textElement, { opacity: opacity, duration: 0.5, overwrite: 'auto' });
+  
+    // Update camera zoom level based on scroll and screen width
+    const zoomOut = Math.min(100 + (scrollTop / 5) + (screenWidth / 50), 899);
+    bg.three.camera.position.set(0, 0, zoomOut);
+  
+    // Update the blur filter: Increase blur as you scroll down (maxBlur: 10px)
+    const maxBlur = 10;
+    const blurVal = Math.min((scrollTop / maxScroll) * maxBlur, maxBlur);
+    gsap.to(container, { filter: `blur(px)`, duration: 0.5, overwrite: 'auto' });
+  
+    ticking = false;
+  };
+  
+  const onScroll = () => {
+    latestScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    if (!ticking) {
+      requestAnimationFrame(updateOnScroll);
+      ticking = true;
+    }
+  };
+  
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  
+  // Initial call on load
+  updateOnScroll();
+  
+  // ==============================
+  // GSAP ScrollTrigger for Card Transition
+  // ==============================
+  
+  // Pin the starfield card so it remains fixed while scrolling
+  ScrollTrigger.create({
+    trigger: "#starfieldCard",
+    start: "top top",
+    end: "bottom top", // Extends the pin duration beyond the div height
+    pin: true,
+    pinSpacing: false,
+  });
+</script><div id="projectSection" class="w-screen px-2 py-8 mx-auto b md:px-12">
+    <div class="flex px-4 pt-16 pb-0 m-auto md:pt-24 max-w-screen-2xl">
+      <div  class="ml-0 invert">
+        <p style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="text-7xl md:text-9xl animate-text">项目简介</p><br/>
+        <p class="mb-0 animate-text"><span style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="text-2xl md:text-3xl">我们正不断开拓科技新视野</span></p>
+      </div>
+    </div>
+    <div class="flex overflow-hidden -mt-48 md:-mt-8 max-w-[100vw] place-content-center">
+      <div class="flex flex-col w-screen grid-cols-1 gap-6 max-w-[1500px] mb-16 mx-2 md:mx-4 text-white bg-black border border-[#DC003B] bg-opacity-75  md:grid-cols-2 project-container">
+        <div class="flex flex-row w-full h-16 p-2 bg-black 5 border-b border-[#DC003B] place-content-center">
+          <div class="absolute flex gap-2 m-auto top-6 left-4 md:top-4">
+            <div class="w-4 h-4 p-0.5 md:p-1.5 md:w-8 md:h-8 bg-[#DC003B] rounded-full">
+              <svg class="m-auto" fill="none" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+              <path d="M5 5h2v2H5V5zm4 4H7V7h2v2zm2 2H9V9h2v2zm2 0h-2v2H9v2H7v2H5v2h2v-2h2v-2h2v-2h2v2h2v2h2v2h2v-2h-2v-2h-2v-2h-2v-2zm2-2v2h-2V9h2zm2-2v2h-2V7h2zm0 0V5h2v2h-2z" fill="black"></path></svg>
+            </div>
+            <div class="w-4 h-4 p-0.5 md:p-1.5 md:w-8 md:h-8 bg-[#DC003B] rounded-full">
+              <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+              <path fill="black" d="M4 11h16v2H4z"></path></svg>
+            </div>
+            <div class="w-4 p-0.5 md:p-1.5 h-4 md:w-8 md:h-8 bg-[#DC003B] rounded-full">
+              <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+              <path d="M21 3h-8v2h4v2h2v4h2V3zm-4 4h-2v2h-2v2h2V9h2V7zm-8 8h2v-2H9v2H7v2h2v-2zm-4-2v4h2v2H5h6v2H3v-8h2z" fill="black"></path></svg>
+            </div>
+          </div>
+          <p class="m-auto"><span style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="mx-auto text-xl text-[#DC003B] tracking-wide md:text-3xl">RECENT PROJECTS</span></p>
+        </div>
+        <div class="grid grid-cols-1 mt-0 md:grid-cols-2 text-[#DC003B]">
+          <div class="p-4 overflow-hidden project-card rounded-xl">
+            <video 
+  style="aspect-ratio: 5 / 3; object-fit: cover; object-position: center;" 
+  class="border border-[#DC003B] object-cover brightness-50 w-full rounded-md" 
+  src="img/projects/xunlu.mp4" 
+  autoplay 
+  loop 
+  muted 
+  playsinline
+></video>
+
+            <div class="w-screen p-4 m-auto md:text-left">
+              <a style="font-family:'OffBit Trial Bold'; font-weight:normal; margin-right: 56px;" class="text-lg font-semibold tracking-wide ">“新建文件夹”号智能算法
+              </a>
+              <p style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="">头歌 自动驾驶算法创新挑战赛</p>
+            </div>
+          </div>
+          <div class="p-4 overflow-hidden project-card rounded-xl">
+            <img style="aspect-ratio: 5 / 3;" src="img/projects/xiaozhi.jpg" alt="Project Image" class="brightness-50 border border-[#DC003B] object-cover w-full rounded-md">
+            <div class="p-4">
+              <a style="font-family:'OffBit Trial Bold'; font-weight:normal;"  class="text-lg font-semibold">超级小智</a>
+              <p style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="">方湖大模型提供算力支持</p>
+            </div>
+          </div>
+          <div class="p-4 overflow-hidden project-card rounded-xl">
+            <img style="aspect-ratio: 5 / 3;" src="img/projects/yolo.png" alt="Project Image" class="border border-[#DC003B] object-cover w-full rounded-md">
+            <div class="p-4">
+              <a style="font-family:'OffBit Trial Bold'; font-weight:normal;"  class="text-lg font-semibold">YOLO面部识别算法</a>
+              <p style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="">基于CNN神经网络架构</p>
+            </div>
+          </div>
+          <div class="p-4 overflow-hidden project-card rounded-xl">
+            <img style="aspect-ratio: 5 / 3;" src="img/projects/xsbd.jpg" alt="Project Image" class="border brightness-75 border-[#DC003B] object-cover w-full rounded-md">
+            <div class="p-4">
+              <a style="font-family:'OffBit Trial Bold'; font-weight:normal;"  class="text-lg font-semibold">新生报到数据大屏 </a>
+              <p style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="">三级联动数据库+学生档案管理</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><a data-ccursor class="flex w-56 p-2 m-auto mb-32 text-xl bg-[#DC003B] border hidden border-black rounded-sm group h-min place-content-center animate-text"><span style="font-family:'OffBit Trial Regular';font-weight:normal" class="z-50 m-auto mt-1 text-lg tracking-widest text-white">MORE PROJECTS</span> <span class="w-8 h-8 m-auto mr-0"><svg fill="white" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+    <path d="M3 21V3h18v18H3zM19 5H5v14h14V5zM7 13v-2h6V9h2v2h2v2h-2v2h-2v-2H7zm4 2h2v2h-2v-2zm0-8v2h2V7h-2z" fill="white"></path></svg></span></a>
+    
+  </div>
+    
+        <script>
+      gsap.registerPlugin(ScrollTrigger);
+      var projectsContainer = document.getElementById('projects-container');
+      document.addEventListener("DOMContentLoaded", function() {
+        gsap.utils.toArray('.project-card').forEach(card => {
+          gsap.to(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: "-200px center", // Trigger the animation when the card enters the viewport
+              end: "300px center",
+              scrub: true, // Smooth scrubbing
+
+            },
+            rotateY: 0,
+            translateZ: 0, // Move the card forward on focus
+            perspective: 0,
+            opacity: 1.5, // Increase opacity when in focus
+            ease: "none"
+          });
+        });
+      });
+      </script>
+      <script>
+gsap.registerPlugin(ScrollTrigger);
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Create a GSAP timeline with ScrollTrigger
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".project-container",
+      start: "-400px center",  // Start the animation when ".project-container" enters the center of the viewport
+      end: "center -1200px",   // End when it leaves the top of the viewport
+      scrub: true          // Smooth scrubbing, syncs the animation to the scroll bar
+    }
+  });
+
+  // Add animation to the timeline
+  tl.to(".project-container", {
+    scale: 1,             // Scale to 100%
+    rotationX: 0,         // Reset rotation
+    perspective: 0,       // Remove perspective
+    ease: "ease-out"      // Use a linear ease for smooth continuous scroll effects
+  });
+
+  // Add staggered animation for the text elements
+  const textElements = gsap.utils.toArray('.animate-text');
+  gsap.from(textElements, {
+    scrollTrigger: {
+      trigger: textElements[0],
+      start: "top 85%",
+      end: "bottom 40%",
+      scrub: false,
+      toggleActions: "play none none reverse"
+    },
+    y: 200,
+    scale: 0.5,
+    opacity: 0,
+    duration: 1.3,
+    ease: "power.inOut",
+    stagger: 0.2 // Stagger the animations
+  });
+});
+</script>
+
+         
+         <script>
+
+         VANTA.NET({
+            el: "#projectSection",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 2.00,
+            scaleMobile: 2.00,
+            color: 0xDC003B,
+            backgroundColor: 0x000000
+            })
+         </script>        
+        
+      <style>
+          .aspect-w-2 {
+              aspect-ratio: 2 / 1;
+          }
+          .aspect-w-1 {
+              aspect-ratio: 1 / 2;
+          }
+          .spline-container {
+              position: relative;
+              padding-top: 50%; /* Adjust this value to change the aspect ratio */
+          }
+          .spline-container iframe, .spline-container spline-viewer {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+          }
+      </style>
+        
+
+      
+
+
+        
+
+<div class="min-h-screen pb-8 bg-gradient-to-tr from-[#DC003B] to-[#5f031bee]">
+    <p style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="pt-16 m-auto text-center text-white text-7xl md:text-9xl animate-text">设备</p>
+    <div  class="grid w-screen max-h-[900px] h-screen max-w-screen-2xl grid-cols-2 gap-4 p-4 m-auto mt-12 md:grid-cols-3">
+        <a  data-ccursor aria-label="NVIDIA 5070 TI" class="flex col-span-2 bg-black rounded-2xl bg-gradient-to-tr from-white to-gray-300 md:col-span-1 md:row-span-2 place-content-center backdrop-blur-xl">
+            <p style="font-family:'OffBit Trial Bold';font-weight:normal;" class="absolute flex flex-row mt-4 text-xl text-center text-black pointer-events-none md:mt-16 place-content-center">NVIDIA 5070 TI</p>
+            <img src="img/equipment/5070ti.png" alt="NVIDIA 5070 TI" class="w-auto h-auto m-auto duration-300 ease-in-out pointer-events-none group-hover:scale-75 md:w-full md:h-auto">
+        </a>
+        <a data-ccursor  aria-label="Meta Quest Pro" style="border-radius: 16px;" class="flex rounded-lg bg-gradient-to-tr from-white to-gray-300 group place-content-center">
+            <p style="font-family:'OffBit Trial Bold';font-weight:normal;" class="absolute flex flex-row mt-4 text-lg text-center text-black pointer-events-none md:mt-16 place-content-center">QUEST PRO</p>
+            <img src="img/equipment/quest-pro-1.webp" alt="Meta Quest Pro Headset" class="w-auto h-16 m-auto duration-300 ease-in-out pointer-events-none group-hover:scale-75 md:h-40">
+        </a>
+        <a data-ccursor  aria-label="Hololens 2" style="border-radius: 16px; backdrop-filter: blur(5.9px);" class="flex rounded-lg bg-gradient-to-tr from-white to-gray-300 group place-content-center">
+            <p style="font-family:'OffBit Trial Bold';font-weight:normal;" class="absolute flex flex-row mt-4 text-lg text-center text-black pointer-events-none md:mt-16 place-content-center">HOLOLENS 2</p>
+            <img src="img/equipment/holo-lens-2.webp" alt="Microsoft Hololens 2 Headset" class="w-auto h-24 m-auto duration-300 pointer-events-none group-hover:scale-75 md:h-56">
+        </a>
+        <a data-ccursor  aria-label="Insta360 Pro 2" style="border-radius: 16px; backdrop-filter: blur(5.9px);" class="flex rounded-lg bg-gradient-to-tr from-white to-gray-300 group place-content-center">
+            <p style="font-family:'OffBit Trial Bold';font-weight:normal;" class="absolute flex flex-row mt-4 text-lg text-center text-black pointer-events-none md:mt-16 place-content-center">INSTA360 PRO 2</p>
+            <img src="img/equipment/insta360_pro_2.webp" alt="Insta360 Pro 2 Camera" class="w-auto h-32 m-auto duration-300 pointer-events-none group-hover:scale-75 md:h-92">
+        </a>
+        <a data-ccursor  aria-label="Vive Tracker 3.0" style="border-radius: 16px; backdrop-filter: blur(5.9px);" class="flex rounded-lg bg-gradient-to-tr from-white to-gray-300 group place-content-center">
+            <p style="font-family:'OffBit Trial Bold';font-weight:normal;" class="absolute flex flex-row mt-4 text-lg text-center text-black pointer-events-none md:mt-16 place-content-center">VIVE TRACKER 3.0</p>
+            <img src="img/equipment/vivetracker.webp" alt="HTC Vive Tracker 3.0" class="w-auto h-24 m-auto duration-300 pointer-events-none group-hover:scale-75 md:h-56">
+        </a>
+    </div>
+</div><div class="min-h-screen p-8 px-4 bg-black">
+  <header class="px-4 pt-12 pb-0 m-auto max-w-screen-2xl">
+    <div class="invert">
+      <h1 style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="text-7xl md:text-9xl animate-text">
+        关于我们
+      </h1>
+      <h2 style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="mb-0 text-2xl md:text-3xl animate-text">
+        学以致用，创享未来
+      </h2>
+    </div>
+  </header>
+
+  <section class="grid grid-cols-1 gap-4 px-4 pt-8 pb-0 m-auto mt-8 md:grid-cols-2 max-w-screen-2xl">
+    <article d class="border border-[#DC003B] rounded-lg shadow-lg">
+      <img style="aspect-ratio: 5 / 3;" src="img/education/mac-spline/工作室合照.png" alt="工作室核心成员合照">
+      <div class="p-4">
+        <time datetime="2024-07-05" style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="text-gray-200">
+          2025 / 6 / 1
+        </time>
+        <h3 style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="text-3xl font-bold text-white">
+          工作室核心成员合照
+        </h3>
+        <p style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="text-xl text-white max-w-92">
+          见证点滴瞬间
+        </p>
+      </div>
+    </article>
+
+    <article class="border border-[#DC003B] rounded-lg shadow-lg">
+      <img style="aspect-ratio: 5 / 3;" src="img/education/macrob/智能车大赛.jpg" alt="Photo of MacRob Girl's School Student Outreach Program" class="border border-[#DC003B] mb-2 object-cover w-full rounded-t-md">
+      <div class="p-4">
+        <time datetime="2024-07-06" style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="text-gray-200">
+          2025 / 9 / 12
+        </time>
+        <h3 style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="text-3xl font-bold text-white">
+          赛事瞬间
+        </h3>
+        <p style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="text-xl text-white max-w-92">
+          团队成员交稿剪影
+        </p>
+      </div>
+    </article>
+  </section>
+</div>
+
+    <div class"w-screen h-min">
+        
+        <style>
+    .card-container {
+        perspective: 1000px;
+    }
+
+    .card {
+        transition: transform 0.5s;
+    }
+
+    .card:nth-child(1) {
+        transform: rotateY(15deg);
+    }
+
+    .card:nth-child(3) {
+        transform: rotateY(-15deg);
+    }
+
+    @media (max-width: 768px) {
+        .card:nth-child(1), .card:nth-child(3) {
+            transform: rotateY(0deg);
+        }
+        .flip-card {
+            width: 10px; 
+            margin: 0 5vw; /* Side margins to 5% of the viewport width */
+        }
+    }
+</style>
+
+<div  class="bg-gradient-to-tr from-[#DC003B] to-[#5f031bee]">
+<div class="flex pt-8 mb-0 place-content-center ">
+        <h1 style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="m-auto text-4xl font-bold text-center text-white ">价值理念</h1>
+        </div>
+    <div   style="padding-top: 32px;" id="card-container" class="relative flex flex-col gap-4 m-auto pointer-events-none md:flex-row place-content-center card-container">
+    
+        <!-- Cards here -->
+        <div  id="card1" class="m-auto pointer-events-none card flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front" style="background-image: url('img/cards/card1.png');"></div>
+                <div class="flip-card-back"><!-- SVG and details --></div>
+            </div>
+        </div>
+    
+        <div id="card2" class="m-auto pointer-events-none card flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front" style="background-image: url('img/cards/card2.png');"></div>
+                <div class="flip-card-back"><!-- SVG and details --></div>
+            </div>
+        </div>
+    
+        <div id="card3" class="m-auto pointer-events-none card flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front" style="background-image: url('img/cards/card3.png');"></div>
+                <div class="flip-card-back"><!-- SVG and details --></div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    
+    <div class="absolute flex mt-0 place-content-center">
+    <div class="hidden w-full h-full m-auto pointer-events-none bg-animation"> <!------ UNHIDE THIS lATER ----->
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
+        <div id="stars4"></div>
+    </div>
+</div>
+
+
+
+
+<style>
+
+.card-container {
+    display: flex;
+  
+    width: 80%;
+    align-items: center;
+
+
+    padding: 2%; /* Adjusted padding for desktop */
+    position: relative; /* Ensure relative positioning for fade overlays */
+}
+
+
+.card {
+
+    aspect-ratio: 4/5;
+    width: 20%; /* Card width adjusted for desktop */
+    margin: 0 10px; /* Ensure some space between cards */
+    position: relative;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.5);
+}
+
+.flip-card {
+    perspective: 1000px;
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease-out; /* Smooth transition for the transform */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform-style: preserve-3d;
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.flip-card-back {
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    background-color: #222;
+}
+
+.flip-card-front {
+    background-size: cover;
+    background-position: center;
+}
+</style>
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<div class="w-screen h-auto px-8 py-12 text-center text-white border-t bg-gradient-to-r from-black via-black to-black border-slate-700">
+    <div class="flex flex-col items-center w-full h-full space-y-6 text-3xl tracking-widest">
+        <h1 id="site-title" style="font-family:'OffBit Trial Bold'; font-weight:normal;" class="text-4xl font-bold text-white">
+            <span class="block lg:hidden">MNET</span>
+            <span class="hidden lg:block">方湖信创工作室</span>
+        </h1>
+        
+        <p id="tagline" style="font-family:'OffBit Trial Regular'; font-weight:normal;" class="mt-4 text-xl">
+            加入我们，创造未来
+        </p>
+        
+        <!-- <div class="flex mt-8 space-x-6" aria-label="Social Media Links">
+            <a href="https://au.linkedin.com/company/monashemergingtech" class="text-2xl text-white transition hover:text-gray-400" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/monashemergingtech/" class="text-2xl text-white transition hover:text-gray-400" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/people/Monash-Nexus-for-Emerging-Technologies/61562647665251/" class="text-2xl text-white transition hover:text-gray-400" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://discord.gg/hFxzMnxgbK" class="text-2xl text-white transition hover:text-gray-400" aria-label="Discord"><i class="fab fa-discord"></i></a>
+        </div> -->
+        
+        <p style="font-family: Offbit Trial Bold;" class="mt-8 text-lg">©<span id="year"></span> 人工智能与软件学院方湖信创工作室</p>
+    </div>
+</div>
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>  
+        
+          
+        
+        
+
+        
+        </div>
+    </div>
+  </div>
+
+        
+      </body>
+      
+        
+      
+      
+        
+
+
+        
+
+        
+        <style>
+          .heading-animation {
+    position: relative;
+  }
+    h1{
+      position: relative;
+      overflow: hidden;
+      height: 1.5em;
+      display: flex;
+    }
+  .animated-heading {
+    h1, h2 {
+      .word {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+
+  .container {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      justify-content: center;
+
+    
+  }
+  h1, .letter-cell, .section-into-title {
+      margin: auto;
+
+    
+      
+  }
+
+  </style>
+
+
+          </script>
+          <script>
+    AOS.init();
+  
+  </script>
+    
+ 
+    <style>
+      #textContainer {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+      }
+    
+      .text {
+        font-size: clamp(1rem, 4vw, 100rem); /* 字体随屏幕缩放 */
+        opacity: 0;
+        color: white; /* 白色字体 */
+        position: absolute;
+        width: 100%;
+        text-align: center;
+    
+        /* 初始状态：模糊+放大 */
+        transform: scale(1.2);
+        filter: blur(8px);
+        transition: opacity 2s ease, transform 2s ease, filter 2s ease;
+      }
+    
+      .text.active {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+      }
+    </style>
+    
+    <script>
+      const texts = document.querySelectorAll(".fade-text");
+      let index = 0;
+    
+      function showText() {
+        texts.forEach((t, i) => t.classList.remove("active"));
+        texts[index].classList.add("active");
+        index = (index + 1) % texts.length;
+      }
+    
+      showText();
+      setInterval(showText, 4000); // 每4秒切换
+    </script>
+        
+  </html>
+
+
+
+
+
+
+  
